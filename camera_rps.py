@@ -1,8 +1,8 @@
-import numbers
+import numpy
 from RPS_solution import prediction
 
 def get_prediction():
-    number = prediction.index(max(prediction)) - 1
+    number = numpy.argmax(prediction)
     return number
 
 # the cv model prints prediction for the last images before you press 'q'

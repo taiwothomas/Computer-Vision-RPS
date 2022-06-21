@@ -1,4 +1,4 @@
-from curses import KEY_MARK
+#from curses import KEY_MARK
 import random
 from camera_rps import get_prediction
 
@@ -7,7 +7,7 @@ choice = ["Rock", "Paper", "Scissors"]
 
 def get_computer_choice():
     global choice
-    computer_choice = choice[random.ranint(0,2)]
+    computer_choice = choice[random.randint(0,2)]
     return computer_choice
 
 def get_user_choice():
