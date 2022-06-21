@@ -1,12 +1,9 @@
+import numbers
 from RPS_solution import prediction
 
 def get_prediction():
-    for n in range(1,3):
-        if prediction[n]>prediction[n+1]:
-            user_choice = prediction[n]
-        else:
-            user_choice = prediction[n+1]
-    return user_choice
+    number = prediction.index(max(prediction)) - 1
+    return number
 
 # the cv model prints prediction for the last images before you press 'q'
 # it's a list of probability values for each of the four options
