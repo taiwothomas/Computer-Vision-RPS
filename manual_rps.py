@@ -15,12 +15,12 @@ class Rps:
 
     def get_computer_choice(self):
         self.computer_choice = self.choice[random.randint(0,2)]
-        print(self.computer_choice)
+        print(f"Computer chose {self.computer_choice}")
         return self.computer_choice
     
     def get_user_choice(self):
         self.user_choice = self.choice[self.get_prediction()]
-        print(self.user_choice)
+        print(f"You chose {self.user_choice}")
         return self.user_choice
     
     def get_prediction(self):
@@ -46,7 +46,7 @@ class Rps:
     def play(self):
         while self.rounds_played < 5:
             self.get_winner(self.get_user_choice(), self.get_computer_choice())
-        
+        print(f"Computer scored {self.computer_wins}.\nYou scored {self.user_wins}.")
         if self.computer_wins > self.user_wins:
             print("You have lost the war.")
         elif self.user_wins > self.computer_wins:

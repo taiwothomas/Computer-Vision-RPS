@@ -18,6 +18,11 @@ def vision():
         data[0] = normalized_image
         prediction = model.predict(data)
         cv2.imshow('frame', frame)
+
+        timer = 5 + t - time.time()
+        countdown = cv2.putText(frame, f"{int(timer)}", (100, 100),
+        cv2.FONT_HERSHEY_PLAIN, 2, (255,0,0), 2)
+        cv2.imshow('frame', countdown)
         # Press q to close the window
         print(prediction)
         if cv2.waitKey(1) & 0xFF == ord('q'):
