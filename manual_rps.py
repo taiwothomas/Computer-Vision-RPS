@@ -1,49 +1,60 @@
-#from curses import KEY_MARK
+import numpy
+from RPS_solution import vision
 import random
-from camera_rps import get_prediction
 
 
-choice = ["Rock", "Paper", "Scissors"]
-computer_wins = 0
-user_wins = 0
-rounds_played = 0
+class Rps:
 
-def get_computer_choice():
-    global choice
-    computer_choice = choice[random.randint(0,2)]
-    return computer_choice
+    def __init__(self):
+        self.choice = ['Rock', 'Paper', 'Scissors']
+        self.user_wins = 0
+        self.computer_wins = 0
+        self.rounds_played = 0
+        self.computer_choice = ""
+        self.user_choice = ""
 
-def get_user_choice():
-    global choice
-    num = get_prediction()
-    user_choice = choice[num]
-    return user_choice
-
-def get_winner(player_1, player_2):
-    global choice, computer_wins, user_wins, rounds_played
-    first = choice.index(player_1)
-    second = choice.index(player_2)
-    result = first - second
-    if result == 0:
-        print("It's a draw")
-    elif result == -1 or 2:
-        print("You lose.")
-        computer_wins += 1
-    else:
-        print("You win!")
-        user_wins += 1
-    rounds_played += 1
-    return computer_wins, user_wins
-
-def play():
-    get_winner(get_user_choice(), get_computer_choice())
-
-while rounds_played < 5:
-    play()
+    def get_computer_choice(self):
+        self.computer_choice = self.choice[random.randint(0,2)]
+        print(self.computer_choice)
+        return self.computer_choice
     
-if computer_wins > user_wins:
-    print("You have lost the war.")
-elif user_wins > computer_wins:
-    print("You have won the war.")
-else:
-    print("Stalemate. Impasse. Deadlock. Unanimous draw.")
+    def get_user_choice(self):
+        self.user_choice = self.choice[self.get_prediction()]
+        print(self.user_choice)
+        return self.user_choice
+    
+    def get_prediction(self):
+        number = numpy.argmax(vision()) - 1
+        return number
+    
+    def get_winner(self, player_1, player_2):
+        first  = self.choice.index(player_1)
+        second = self.choice.index(player_2)
+        result = first - second
+        print(result)
+
+        if result == 0:
+            print("It's a draw.")
+        elif result == -1 or result == 2:
+            print("You lose.")
+            self.computer_wins += 1
+        else:
+            print("You win.")
+            self.user_wins += 1
+        self.rounds_played += 1
+    
+    def play(self):
+        while self.rounds_played < 5:
+            self.get_winner(self.get_user_choice(), self.get_computer_choice())
+        
+        if self.computer_wins > self.user_wins:
+            print("You have lost the war.")
+        elif self.user_wins > self.computer_wins:
+            print("You have won the war.")
+        else:
+            print("Stalemate. Impasse. Deadlock. Unanimous draw.")
+
+
+game = Rps()
+game.play()
+

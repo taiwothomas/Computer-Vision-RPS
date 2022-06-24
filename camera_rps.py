@@ -1,4 +1,3 @@
-from pkg_resources import run_script
 import numpy
 from RPS_solution import vision
 
